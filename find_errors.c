@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:32:16 by sdemaude          #+#    #+#             */
-/*   Updated: 2023/12/12 10:56:34 by sdemaude         ###   ########.fr       */
+/*   Updated: 2023/12/13 12:59:01 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,14 @@ int	mod_strcmp(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	while (s1[i] == '+' || (s1[i] == '0' && s1[i + 1] != '\0'))
+	if (s1[i] == '-' && s2[j] == '-')
+	{
+		i++;
+		j++;
+	}
+	else if ((s1[i] == '+') || (s1[i] == '-' && s1[i + 1] == '0'))
+		i++;
+	while (s1[i] == '0' && s1[i + 1] != '\0')
 		i++;
 	while (s1[i] && s2[j])
 	{
@@ -71,27 +78,31 @@ int	mod_strcmp(char *s1, char *s2)
 		i++;
 		j++;
 	}
-	if (s1[i])
+	if (s1[i] || s2[j])
 		return (1);
-	else if (s2[j])
-		return (-1);
 	return (0);
 }
 
 int	check_int_maxmin(int *array, char **str)
 {
-	int	i;
-	int	j;
-	int	k;
+	int		i;
+	int		j;
+	int		k;
+	char	*tmp;
 
 	i = 1;
 	j = 0;
 	k = 0;
 	while (str[i])
 	{
-		if (mod_strcmp(str[i], ft_itoa(array[i - 1])) != 0)
+		tmp = ft_itoa(array[i - 1]);
+		if (mod_strcmp(str[i], tmp) != 0)
+		{
+			free (tmp);
 			return (1);
+		}
 		i++;
+		free (tmp);
 	}
 	return (0);
 }

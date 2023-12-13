@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 15:19:46 by sdemaude          #+#    #+#             */
-/*   Updated: 2023/12/12 10:55:59 by sdemaude         ###   ########.fr       */
+/*   Updated: 2023/12/13 12:08:51 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ int		check_doubles(int size, int *array);
 int		check_int_maxmin(int *array, char **str);
 int		ft_atoi(const char *nptr);
 char	*ft_itoa(int n);
-
 
 #endif 
