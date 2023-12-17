@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 16:19:35 by sdemaude          #+#    #+#             */
-/*   Updated: 2023/12/13 12:59:15 by sdemaude         ###   ########.fr       */
+/*   Updated: 2023/12/17 17:52:05 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,23 @@ int	char_to_int(int size, char **str)
 	free (array);
 	return (0);
 }
-/*
+
 t_stack_list	tab_to_list(int size, int *array)
 {
-
-	while (size > 0)
-	return ();
 }
 
+/*
 int	push_swap()
 {
 }*/
 
-	/*check if ther is a space in the av
-	*if yes, call split
-	*if no, av[i++];
-	*create a char** every time ....
-	*use strcat to concatenate them or make a loop
-	*to check error in every ch* & char **.
-	*/
+/*check if ther is a space in the av
+*if yes, call split
+*if no, av[i++];
+*create a char** every time ....
+*use strcat to concatenate them or make a loop
+*to check error in every ch* & char **.
+*/
 
 int	main(int ac, char **av)
 {
