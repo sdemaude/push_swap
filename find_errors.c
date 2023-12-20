@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:32:16 by sdemaude          #+#    #+#             */
-/*   Updated: 2023/12/13 12:59:01 by sdemaude         ###   ########.fr       */
+/*   Updated: 2023/12/17 18:56:48 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	check_doubles(int size, int *array)
 		while (j < size)
 		{
 			if (array[i] == array[j])
-				return (1);
+				return (write(2, "Error\n", 6));
 			j++;
 		}
 		i++;
@@ -99,7 +99,7 @@ int	check_int_maxmin(int *array, char **str)
 		if (mod_strcmp(str[i], tmp) != 0)
 		{
 			free (tmp);
-			return (1);
+			return (write(2, "Error\n", 6));
 		}
 		i++;
 		free (tmp);

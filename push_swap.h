@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 15:19:46 by sdemaude          #+#    #+#             */
-/*   Updated: 2023/12/17 17:52:01 by sdemaude         ###   ########.fr       */
+/*   Updated: 2023/12/20 20:25:34 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <unistd.h>
-# include "Libft/libft.h"
+# include "libft/libft.h"
 
 typedef struct s_stack_list
 {
@@ -38,6 +38,7 @@ int				check_int_maxmin(int *array, char **str);
 
 //Utils
 t_stack_list	*mod_lstlast(t_stack_list *lst);
+void			mod_lstnew_back(t_stack_list **stack, int content);
 
 //Sorting fonctions
 void			pa(t_stack_list **a, t_stack_list **b);
