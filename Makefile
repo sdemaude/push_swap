@@ -6,7 +6,7 @@
 #    By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/10 15:30:49 by sdemaude          #+#    #+#              #
-#    Updated: 2024/01/05 16:42:55 by sdemaude         ###   ########.fr        #
+#    Updated: 2024/01/05 16:49:46 by sdemaude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC = push_swap.c\
 
 $(NAME) : $(LIB) 
 #	cd libft && $(MAKE)
-	$(CC) $< $(LIB) -o $(NAME)
+	$(CC) $(SRC) $(LIB) -o $(NAME)
 
 $(LIB) :
 	$(MAKE) -C $$(dirname $@)
