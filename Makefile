@@ -6,25 +6,27 @@
 #    By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/10 15:30:49 by sdemaude          #+#    #+#              #
-#    Updated: 2023/12/13 15:13:11 by sdemaude         ###   ########.fr        #
+#    Updated: 2024/01/05 16:42:55 by sdemaude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap.a
+NAME = push_swap
 OBJS = $(SRC:.c=.o)
-CC = cc -Wall -Wextra -Werror
-LIB = "Libft/libft.a"
+CC = cc -Wall -Wextra -Werror -g
+LIB = "libft/libft.a"
 
 SRC = push_swap.c\
 	push_swap_utils.c\
-	find_errors.c
+	sorting_utils.c\
+	find_errors.c\
+	ft_push.c\
+	ft_swap.c\
+	ft_rotate.c\
+	ft_rev_rotate.c
 
-%.o: %.c
-	$(CC) -c $< -o $@
-
-$(NAME) : $(OBJS) $(LIB)
-	cp $(LIB) $(NAME)
-	ar rs $(NAME) $(OBJS)
+$(NAME) : $(LIB) 
+#	cd libft && $(MAKE)
+	$(CC) $< $(LIB) -o $(NAME)
 
 $(LIB) :
 	$(MAKE) -C $$(dirname $@)
@@ -33,7 +35,6 @@ all : $(NAME)
 
 clean :
 	$(MAKE) clean -C $$(dirname $(LIB));
-	rm -f $(OBJS)
 
 fclean : clean
 	rm -f $(LIB)

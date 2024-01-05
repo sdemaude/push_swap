@@ -6,12 +6,11 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:10:33 by sdemaude          #+#    #+#             */
-/*   Updated: 2023/12/20 20:25:37 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/05 14:59:03 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdlib.h>
 
 t_stack_list	*mod_lstlast(t_stack_list *lst)
 {
