@@ -6,11 +6,12 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:32:16 by sdemaude          #+#    #+#             */
-/*   Updated: 2023/12/17 18:56:48 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:59:02 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 int	find_error(int a, char **v)
 {
@@ -34,7 +35,7 @@ int	find_error(int a, char **v)
 	return (0);
 }
 
-int	check_doubles(int size, int *array)
+int	check_doubles(int size, int **array)
 {
 	int	i;
 	int	j;
@@ -45,7 +46,7 @@ int	check_doubles(int size, int *array)
 	{
 		while (j < size)
 		{
-			if (array[i] == array[j])
+			if ((*array)[i] == (*array)[j])
 				return (write(2, "Error\n", 6));
 			j++;
 		}
@@ -83,20 +84,16 @@ int	mod_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-int	check_int_maxmin(int *array, char **str)
+int	check_int_maxmin(int **array, char **str, int size)
 {
 	int		i;
-	int		j;
-	int		k;
 	char	*tmp;
 
-	i = 1;
-	j = 0;
-	k = 0;
-	while (str[i])
+	i = 0;
+	while (i < size)
 	{
-		tmp = ft_itoa(array[i - 1]);
-		if (mod_strcmp(str[i], tmp) != 0)
+		tmp = ft_itoa((*array)[i]);
+		if (mod_strcmp(str[i + 1], tmp))
 		{
 			free (tmp);
 			return (write(2, "Error\n", 6));

@@ -6,11 +6,12 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 14:04:22 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/05 14:59:18 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/09 11:57:29 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 static void	swap(t_stack_list **head)
 {
@@ -18,7 +19,7 @@ static void	swap(t_stack_list **head)
 		return ;
 	*head = (*head)->next;
 	(*head)->prev->prev = *head;
-	(*head)->next->prev = (*head)->next;
+	(*head)->prev->next = (*head)->next;
 	if ((*head)->next)
 		(*head)->next->prev = (*head)->prev;
 	(*head)->next = (*head)->prev;

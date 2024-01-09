@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 15:19:46 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/05 14:59:12 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/09 12:15:17 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ typedef struct s_stack_list
 
 //Check errors
 int				find_error(int a, char **v);
-int				check_doubles(int size, int *array);
-int				check_int_maxmin(int *array, char **str);
+int				check_doubles(int size, int **array);
+int				check_int_maxmin(int **array, char **str, int size);
 
 //Utils
 t_stack_list	*mod_lstlast(t_stack_list *lst);
 void			mod_lstnew_back(t_stack_list **stack, int content);
 int				is_sorted(t_stack_list **stack);
+void			sort_three(t_stack_list **stack);
 
 //Sorting fonctions
 void			pa(t_stack_list **a, t_stack_list **b);

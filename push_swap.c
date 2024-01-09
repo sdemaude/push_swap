@@ -6,13 +6,14 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:09:46 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/05 15:01:00 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:10:06 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
-int	char_to_int(int size, char **str, int **array, int *arr_size)
+int	char_to_int(int size, char **str, int **array)
 {
 	int	i;
 	int	j;
@@ -22,17 +23,17 @@ int	char_to_int(int size, char **str, int **array, int *arr_size)
 	*array = malloc(size * sizeof(int));
 	if (!*array)
 		return (1);
-	while (str[i])
+	while (i <= size)
 	{
-		*array[i - 1] = ft_atoi(str[i]);
+		(*array)[i - 1] = ft_atoi(str[i]);
 		i++;
 	}
-	if (check_int_maxmin(*array, str) || check_doubles(size, *array))
+	if (check_doubles(size, array) || check_int_maxmin(array, str, size))
 	{
-		free (*array);
+		printf("free?\n");
+		free(*array);
 		return (1);
 	}
-	*arr_size = i;
 	return (0);
 }
 
@@ -46,19 +47,23 @@ void	arr_to_stack(t_stack_list **stack, int *array, int size)
 		mod_lstnew_back(stack, array[i]);
 		i++;
 	}
+	while ((*stack)->prev != NULL)
+		*stack = (*stack)->prev;
 	free (array);
 }
 
 void	sorting_algo(t_stack_list **a, t_stack_list **b, int size)
 {
 	(void)b;
-	if (!(is_sorted(a)))
+	printf("in sorting_algo\n");
+	if (!is_sorted(a))
 	{
+		printf("is not sorted\n");
 		if (size == 2)
 			sa(a);
-	/*	else if (size == 3)
-		{}
-		else if (size > 3)
+		else if (size == 3)
+			sort_three(a);
+/*		else if (size > 3)
 		{}
 */	}
 }
@@ -70,9 +75,11 @@ int	main(int ac, char **av)
 	t_stack_list	*a;
 	t_stack_list	*b;
 
+	size = ac - 1;
+	array = NULL;
 	a = NULL;
 	b = NULL;
-	if (find_error(ac, av) || char_to_int((ac - 1), av, &array, &size))
+	if (find_error(ac, av) || char_to_int(size, av, &array))
 		return (0);
 	arr_to_stack(&a, array, size);
 	sorting_algo(&a, &b, size);
@@ -80,11 +87,6 @@ int	main(int ac, char **av)
 	free (b);
 	return (0);
 }
-
-/*
-int	push_swap()
-{
-}*/
 
 /*check if ther is a space in the av
 *if yes, call split
