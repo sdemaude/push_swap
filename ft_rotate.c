@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   ft_rotate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 14:03:57 by sdemaude          #+#    #+#             */
-/*   Updated: 2023/12/17 17:51:46 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:12:00 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	rotate(t_stack_list **stack)
 {
 	t_stack_list	*last;
 
-	if (!stack || !(*stack)->next)
+	if (!*stack || !(*stack)->next)
 		return ;
 	last = mod_lstlast(*stack);
 	last->next = *stack;

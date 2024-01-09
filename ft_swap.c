@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 14:04:22 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/09 11:57:29 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:12:06 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,18 @@
 
 static void	swap(t_stack_list **head)
 {
-	if (!head || !(*head)->next)
+	t_stack_list	*next;
+
+	if (!*head || !(*head)->next)
 		return ;
-	*head = (*head)->next;
-	(*head)->prev->prev = *head;
-	(*head)->prev->next = (*head)->next;
-	if ((*head)->next)
-		(*head)->next->prev = (*head)->prev;
-	(*head)->next = (*head)->prev;
-	(*head)->prev = NULL;
+	next = (*head)->next;
+	(*head)->prev = next;
+	(*head)->next = next->next;
+	if (next->next)
+		next->next->prev = *head;
+	next->next = *head;
+	next->prev = NULL;
+	*head = next;
 }
 
 void	sa(t_stack_list **a)

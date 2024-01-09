@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 15:19:46 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/09 12:15:17 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:50:21 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ typedef struct s_stack_list
 	struct s_stack_list	*next;
 	struct s_stack_list	*prev;
 }	t_stack_list;
+
+//Must delete
+void			ft_printstack(t_stack_list **stack);
 
 //Check errors
 int				find_error(int a, char **v);
