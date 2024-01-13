@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:09:46 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/09 18:12:18 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/13 19:44:45 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,17 @@ void	arr_to_stack(t_stack_list **stack, int *array, int size)
 void	sorting_algo(t_stack_list **a, t_stack_list **b, int size)
 {
 	(void)b;
-	printf("in sorting_algo\n");
+//	printf("in sorting_algo\n");
 	if (!is_sorted(a))
 	{
-		printf("is not sorted\n");
+//		printf("is not sorted\n");
 		if (size == 2)
 			sa(a);
 		else if (size == 3)
 			sort_three(a);
-/*		else if (size > 3)
-		{}
-*/	}
+//		else if (size > 3)
+//			sort_stacks(a, b);
+	}
 }
 
 int	main(int ac, char **av)
@@ -102,9 +102,9 @@ int	main(int ac, char **av)
 	if (find_error(ac, av) || char_to_int(size, av, &array))
 		return (0);
 	arr_to_stack(&a, array, size);
-	ft_printstack(&a);
+//	ft_printstack(&a);
 	sorting_algo(&a, &b, size);
-	ft_printstack(&a);
+//	ft_printstack(&a);
 	free (a);
 	free (b);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 15:19:46 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/09 16:50:21 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/13 19:44:37 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ int				check_doubles(int size, int **array);
 int				check_int_maxmin(int **array, char **str, int size);
 
 //Utils
+int				mod_lstsize(t_stack_list *lst);
 t_stack_list	*mod_lstlast(t_stack_list *lst);
 void			mod_lstnew_back(t_stack_list **stack, int content);
-int				is_sorted(t_stack_list **stack);
+bool			is_sorted(t_stack_list **stack);
 void			sort_three(t_stack_list **stack);
+void			sort_stacks(t_stack_list **a, t_stack_list **b);
 
 //Sorting fonctions
 void			pa(t_stack_list **a, t_stack_list **b);

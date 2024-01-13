@@ -6,11 +6,24 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:10:33 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/09 18:12:09 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:28:16 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	mod_lstsize(t_stack_list *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
+}
 
 t_stack_list	*mod_lstlast(t_stack_list *lst)
 {

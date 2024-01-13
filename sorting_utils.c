@@ -6,13 +6,13 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:32:28 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/09 18:12:12 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:38:44 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_sorted(t_stack_list **stack)
+bool	is_sorted(t_stack_list **stack)
 {
 	t_stack_list	*current;
 
@@ -20,10 +20,10 @@ int	is_sorted(t_stack_list **stack)
 	while (current->next != NULL)
 	{
 		if (current->content > current->next->content)
-			return (0);
+			return (false);
 		current = current->next;
 	}
-	return (1);
+	return (true);
 }
 
 void	sort_three(t_stack_list **stack)

@@ -6,14 +6,16 @@
 #    By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/10 15:30:49 by sdemaude          #+#    #+#              #
-#    Updated: 2024/01/05 16:49:46 by sdemaude         ###   ########.fr        #
+#    Updated: 2024/01/13 19:42:09 by sdemaude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-OBJS = $(SRC:.c=.o)
-CC = cc -Wall -Wextra -Werror -g
-LIB = "libft/libft.a"
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g
+OBJ = $(SRC:.c=.o)
+LIBDIR = libft
+LIB = $(LIBDIR)/libft.a
 
 SRC = push_swap.c\
 	push_swap_utils.c\
@@ -24,20 +26,25 @@ SRC = push_swap.c\
 	ft_rotate.c\
 	ft_rev_rotate.c
 
-$(NAME) : $(LIB) 
-#	cd libft && $(MAKE)
-	$(CC) $(SRC) $(LIB) -o $(NAME)
-
-$(LIB) :
-	$(MAKE) -C $$(dirname $@)
-
 all : $(NAME)
 
+$(LIB) : $(LIBDIR)
+	make -C $(LIBDIR)
+
+$(NAME) : $(OBJ) $(LIB)
+	$(CC) $(CFLAGS) $(OBJ) $(LIB) -o $(NAME)
+
+%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean :
-	$(MAKE) clean -C $$(dirname $(LIB));
+	rm -f *.o
+	make clean -C $(LIBDIR) 
 
 fclean : clean
-	rm -f $(LIB)
 	rm -f $(NAME)
+	rm -f $(LIB)
 
 re : fclean all
+
+.PHONY: all clean fclean re 
