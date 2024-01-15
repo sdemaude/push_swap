@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 15:19:46 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/13 19:44:37 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:05:33 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # include <unistd.h>
+# include <limits.h>
 # include "libft/libft.h"
 
 typedef struct s_stack_list
@@ -43,9 +44,18 @@ int				check_int_maxmin(int **array, char **str, int size);
 int				mod_lstsize(t_stack_list *lst);
 t_stack_list	*mod_lstlast(t_stack_list *lst);
 void			mod_lstnew_back(t_stack_list **stack, int content);
+t_stack_list	*find_max(t_stack_list *stack);
+t_stack_list	*find_min(t_stack_list *stack);
+void			cost_analysis(t_stack_list *a, t_stack_list *b);
 bool			is_sorted(t_stack_list **stack);
 void			sort_three(t_stack_list **stack);
 void			sort_stacks(t_stack_list **a, t_stack_list **b);
+void			min_on_top(t_stack_list **stack);
+t_stack_list	*get_cheapest(t_stack_list *stack);
+void			set_cheapest(t_stack_list *stack);
+void			set_target_a(t_stack_list *a, t_stack_list *b);
+void			set_target_b(t_stack_list *a, t_stack_list *b);
+void			current_index(t_stack_list *stack);
 
 //Sorting fonctions
 void			pa(t_stack_list **a, t_stack_list **b);

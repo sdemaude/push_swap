@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:09:46 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/13 19:44:45 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:05:45 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,11 @@ void	arr_to_stack(t_stack_list **stack, int *array, int size)
 		mod_lstnew_back(stack, array[i]);
 		i++;
 	}
-	while ((*stack)->prev != NULL)
-		*stack = (*stack)->prev;
 	free (array);
 }
 
 void	sorting_algo(t_stack_list **a, t_stack_list **b, int size)
 {
-	(void)b;
 //	printf("in sorting_algo\n");
 	if (!is_sorted(a))
 	{
@@ -83,8 +80,8 @@ void	sorting_algo(t_stack_list **a, t_stack_list **b, int size)
 			sa(a);
 		else if (size == 3)
 			sort_three(a);
-//		else if (size > 3)
-//			sort_stacks(a, b);
+		else if (size > 3)
+			sort_stacks(a, b);
 	}
 }
 

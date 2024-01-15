@@ -6,7 +6,7 @@
 #    By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/10 15:30:49 by sdemaude          #+#    #+#              #
-#    Updated: 2024/01/13 19:42:09 by sdemaude         ###   ########.fr        #
+#    Updated: 2024/01/15 16:31:42 by sdemaude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ SRC = push_swap.c\
 	ft_push.c\
 	ft_swap.c\
 	ft_rotate.c\
-	ft_rev_rotate.c
+	ft_rev_rotate.c\
+	sort_stacks.c\
+	sort_stacks_utils.c
 
 all : $(NAME)
 
