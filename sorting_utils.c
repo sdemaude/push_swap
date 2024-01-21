@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:32:28 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/15 18:05:38 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/21 18:14:33 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,6 @@ t_stack_list	*find_max(t_stack_list *stack)
 	return (max_node);
 }
 
-void	cost_analysis(t_stack_list *a, t_stack_list *b)
-{
-	int	len_a;
-	int	len_b;
-
-	len_a = mod_lstsize(a);
-	len_b = mod_lstsize(b);
-	while (a)
-	{
-		a->push_cost = a->index;
-		if (!(a->above_median))
-			a->push_cost = len_a - (a->index);
-		if (a->target_node->above_median)
-			a->push_cost += a->target_node->index;
-		else
-			a->push_cost += len_b - (a->target_node->index);
-		a = a->next;
-	}
-}
-
 bool	is_sorted(t_stack_list **stack)
 {
 	t_stack_list	*current;
@@ -87,7 +67,7 @@ bool	is_sorted(t_stack_list **stack)
 	}
 	return (true);
 }
-
+/*
 void	sort_three(t_stack_list **stack)
 {
 	if ((*stack)->content < (*stack)->next->content)
@@ -103,6 +83,36 @@ void	sort_three(t_stack_list **stack)
 		sa(stack);
 		if (!is_sorted(stack))
 			rra(stack);
+	}
+	else
+		ra(stack);
+}
+*/
+
+void	sort_three(t_stack_list **stack)
+{
+	int	min;
+	int	max;
+
+	if (is_sorted(stack))
+		return ;
+	min = find_min(*stack)->content;
+	max = find_max(*stack)->content;
+	if ((*stack)->content == min)
+	{
+		sa(stack);
+		ra(stack);
+	}
+	else if ((*stack)->next->content == min
+		&& (*stack)->next->next->content == max)
+		sa(stack);
+	else if ((*stack)->next->content == max
+		&& (*stack)->next->next->content == min)
+		rra(stack);
+	else if ((*stack)->content == max && (*stack)->next->next->content == min)
+	{
+		sa(stack);
+		rra(stack);
 	}
 	else
 		ra(stack);

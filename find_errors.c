@@ -6,12 +6,11 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:32:16 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/06 18:59:02 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/21 13:29:06 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int	find_error(int a, char **v)
 {

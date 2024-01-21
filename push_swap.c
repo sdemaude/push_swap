@@ -5,16 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 19:09:46 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/15 18:05:45 by sdemaude         ###   ########.fr       */
+/*   Created: 2024/01/21 13:40:22 by sdemaude          #+#    #+#             */
+/*   Updated: 2024/01/21 18:15:10 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 //MUST DELETE !!
-void	ft_printstack(t_stack_list **stack)
+/*void	ft_printstack(t_stack_list **stack)
 {
 	int				i;
 	t_stack_list	*current;
@@ -23,15 +22,15 @@ void	ft_printstack(t_stack_list **stack)
 	current = *stack;
 	while (current != NULL)
 	{
-/*		if (current->prev)
+		if (current->prev)
 			printf("node prev = %d\n", current->prev->content);
-*/		printf("node %d = %d\n", i, current->content);
-/*		if (current->next)
+		printf("node %d = %d\n", i, current->content);
+		if (current->next)
 			printf("node next = %d\n", current->next->content);
-*/		current = current->next;
+		current = current->next;
 		i++;
 	}
-}
+}*/
 
 int	char_to_int(int size, char **str, int **array)
 {
@@ -50,7 +49,6 @@ int	char_to_int(int size, char **str, int **array)
 	}
 	if (check_doubles(size, array) || check_int_maxmin(array, str, size))
 	{
-		printf("free?\n");
 		free(*array);
 		return (1);
 	}
@@ -72,10 +70,8 @@ void	arr_to_stack(t_stack_list **stack, int *array, int size)
 
 void	sorting_algo(t_stack_list **a, t_stack_list **b, int size)
 {
-//	printf("in sorting_algo\n");
 	if (!is_sorted(a))
 	{
-//		printf("is not sorted\n");
 		if (size == 2)
 			sa(a);
 		else if (size == 3)
@@ -99,9 +95,7 @@ int	main(int ac, char **av)
 	if (find_error(ac, av) || char_to_int(size, av, &array))
 		return (0);
 	arr_to_stack(&a, array, size);
-//	ft_printstack(&a);
 	sorting_algo(&a, &b, size);
-//	ft_printstack(&a);
 	free (a);
 	free (b);
 	return (0);
