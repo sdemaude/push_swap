@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:14:29 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/21 20:16:46 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/21 22:22:35 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,28 +111,50 @@ void	is_above_median(t_stack_list *stack)
 	}
 }
 
-void	set_cost(t_stack_list **a, t_stack_list **b)
+int	max_value(int i, int j)
 {
-	int				len_a;
-	int				len_b;
+	if (i > j)
+		return (i);
+	else
+		return (j);
+}
+
+void	set_cost(t_stack_list **src, t_stack_list **dst)
+{
+	int				len_src;
+	int				len_dst;
 	t_stack_list	*current;
 
-	len_a = mod_lstsize(*a);
-	len_b = mod_lstsize(*b);
-	current = *a;
-	is_above_median(*a);
-	is_above_median(*b);
+	len_src = mod_lstsize(*src);
+	len_dst = mod_lstsize(*dst);
+	current = *src;
+	is_above_median(*src);
+	is_above_median(*dst);
 	while (current)
 	{
-		if (current->above_median)
+		if (current->above_median && current->target->above_median)
+			current->push_cost = max_value(current->index,
+					current->target->index);
+		else if (!current->above_median && !current->target->above_median)
+			current->push_cost = max_value(len_src - current->index,
+					len_dst - current->target->index);
+		else if (current->above_median && !current->target->above_median)
+			current->push_cost = current->index
+				+ len_dst - current->target->index;
+		else
+			current->push_cost = len_src - current->index
+				+ current->target->index;
+/*		if (current->above_median)
 			current->push_cost = current->index;
 		else
-			current->push_cost = len_a - current->index;
+			current->push_cost = len_src - current->index;
+
 		if (current->target->above_median)
 			current->push_cost += current->target->index;
 		else
-			current->push_cost += len_b - current->target->index;
-		current = current->next;
+			current->push_cost += len_dst - current->target->index;
+*/
+	current = current->next;
 	}
 }
 
@@ -144,14 +166,10 @@ void	set_cheapest(t_stack_list *stack)
 
 	cheapest_value = LONG_MAX;
 	current = stack;
+	cheapest_node = current;
 	while (current)
 	{
-		if (current->push_cost == 0)
-		{
-			cheapest_value = current->push_cost;
-			cheapest_node = current;
-		}
-		if (current->push_cost < cheapest_value)
+		if (current->push_cost < cheapest_value && current != find_max(stack))
 		{
 			cheapest_value = current->push_cost;
 			cheapest_node = current;
@@ -227,7 +245,53 @@ void	target_on_top_a(t_stack_list **a, t_stack_list **b)
 
 void	target_on_top_b(t_stack_list **a, t_stack_list **b)
 {
-	while (*a != (*b)->target)
+	t_stack_list	*cheapest;
+
+	cheapest = get_cheapest(*b);
+	while (*b != cheapest && *a != cheapest->target)
+	{
+		is_above_median(*a);
+		is_above_median(*b);
+		if (cheapest->above_median == true
+			&& cheapest->target->above_median == true)
+			rr(a, b);
+		else if (cheapest->above_median == false
+			&& cheapest->target->above_median == false)
+			rrr(a, b);
+		else
+		{
+			if (mod_lstsize(*b) < mod_lstsize(*a))
+			{
+				if (cheapest->above_median == true)
+					rb(b);
+				else
+					rrb(b);
+			}
+			else
+			{
+				if (cheapest->target->above_median == true)
+				{
+					ra(a);
+				}
+				else
+					rra(a);
+			}
+		}
+	}
+	while (*b != cheapest || *a != cheapest->target)
+	{
+		is_above_median(*a);
+		is_above_median(*b);
+		if (*b == cheapest && cheapest->target->above_median == true)
+			ra(a);
+		else if (*b == cheapest && cheapest->target->above_median == false)
+			rra(a);
+		else if (*a == cheapest->target && cheapest->above_median == true)
+			rb(b);
+		else
+			rrb(b);
+	}
+/*	while (*a != (*b)->target)
 	{
 		is_above_median(*a);
 		if ((*b)->target->above_median == true)
@@ -235,6 +299,7 @@ void	target_on_top_b(t_stack_list **a, t_stack_list **b)
 		else if ((*b)->target->above_median == false)
 			rra(a);
 	}
+*/
 }
 
 void	min_on_top(t_stack_list **stack)
@@ -242,9 +307,9 @@ void	min_on_top(t_stack_list **stack)
 	while ((*stack)->content != find_min(*stack)->content)
 	{
 		if (find_min(*stack)->above_median)
-			rra(stack);
-		else
 			ra(stack);
+		else
+			rra(stack);
 	}
 }
 
@@ -267,20 +332,21 @@ void	sort_stacks(t_stack_list **a, t_stack_list **b)
 			ra(a);
 		pb(b, a);
 	}
-	while (len_a-- > 3 && !(is_sorted(a)))
+	while (len_a-- > 3 && !is_sorted(a))
 	{
-		if (*a == biggest_node)
-			ra(a);
 		set_target_a(a, b);
 		set_cost(a, b);
 		set_cheapest(*a);
 		target_on_top_a(a, b);
 		pb(b, a);
 	}
-	sort_three(a);
+	if (!is_sorted(a))
+		sort_three(a);
 	while (*b)
 	{
 		set_target_b(a, b);
+		set_cost(b, a);
+		set_cheapest(*b);
 		target_on_top_b(a, b);
 		pa(a, b);
 	}
