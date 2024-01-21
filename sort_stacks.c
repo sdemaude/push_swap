@@ -6,35 +6,34 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:14:29 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/21 18:30:38 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/21 20:16:46 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdbool.h>
 
 t_stack_list	*close_bigger(t_stack_list **stack, t_stack_list *node)
 {
 	int				value;
 	long			closest_bigger;
 	t_stack_list	*closest_node;
-	t_stack_list	**current;
+	t_stack_list	*current;
 
 	value = node->content;
-	current = stack;
+	current = *stack;
 	closest_bigger = LONG_MIN;
-	closest_node = *current;
-	while (*current)
+	closest_node = current;
+	while (current)
 	{
-		if ((*current)->content < value && (closest_bigger == LONG_MIN
-				|| (*current)->content > closest_bigger))
+		if (current->content > value && (closest_bigger == LONG_MIN
+				|| current->content < closest_bigger))
 		{
-			closest_node = *current;
-			closest_bigger = (*current)->content;
+			closest_node = current;
+			closest_bigger = current->content;
 		}
-		*current = (*current)->next;
+		current = current->next;
 	}
-	if (closest_bigger != LONG_MAX)
+	if (closest_bigger != LONG_MIN)
 		return (closest_node);
 	else
 		return (find_min(*stack));
@@ -45,21 +44,21 @@ t_stack_list	*close_smaller(t_stack_list **stack, t_stack_list *node)
 	int				value;
 	long			closest_smaller;
 	t_stack_list	*closest_node;
-	t_stack_list	**current;
+	t_stack_list	*current;
 
 	value = node->content;
 	closest_smaller = LONG_MAX;
-	current = stack;
-	closest_node = *current;
-	while (*current)
+	current = *stack;
+	closest_node = current;
+	while (current)
 	{
-		if ((*current)->content < value && (closest_smaller == LONG_MAX
-				|| (*current)->content > closest_smaller))
+		if (current->content < value && (closest_smaller == LONG_MAX
+				|| current->content > closest_smaller))
 		{
-			closest_node = *current;
-			closest_smaller = (*current)->content;
+			closest_node = current;
+			closest_smaller = current->content;
 		}
-		*current = (*current)->next;
+		current = current->next;
 	}
 	if (closest_smaller != LONG_MAX)
 		return (closest_node);
@@ -69,13 +68,46 @@ t_stack_list	*close_smaller(t_stack_list **stack, t_stack_list *node)
 
 void	set_target_a(t_stack_list **a, t_stack_list **b)
 {
-	t_stack_list	**current;
+	t_stack_list	*current;
 
-	current = a;
+	current = *a;
 	while (current)
 	{
-		(*current)->target = close_smaller(b, *current);
-		*current = (*current)->next;
+		current->target = close_smaller(b, current);
+		current = current->next;
+	}
+}
+
+void	set_target_b(t_stack_list **a, t_stack_list **b)
+{
+	t_stack_list	*current;
+
+	current = *b;
+	while (current)
+	{
+		current->target = close_bigger(a, current);
+		current = current->next;
+	}
+}
+
+void	is_above_median(t_stack_list *stack)
+{
+	int				i;
+	int				median;
+	t_stack_list	*current;
+
+	i = 0;
+	median = mod_lstsize(stack) / 2;
+	current = stack;
+	while (current)
+	{
+		current->index = i;
+		if (i <= median)
+			current->above_median = true;
+		else
+			current->above_median = false;
+		i++;
+		current = current->next;
 	}
 }
 
@@ -83,22 +115,24 @@ void	set_cost(t_stack_list **a, t_stack_list **b)
 {
 	int				len_a;
 	int				len_b;
-	t_stack_list	**current;
+	t_stack_list	*current;
 
 	len_a = mod_lstsize(*a);
 	len_b = mod_lstsize(*b);
-	current = a;
+	current = *a;
+	is_above_median(*a);
+	is_above_median(*b);
 	while (current)
 	{
-		if ((*current)->above_median)
-			(*current)->push_cost = (*current)->index;
+		if (current->above_median)
+			current->push_cost = current->index;
 		else
-			(*current)->push_cost = len_a - (*current)->index;
-		if ((*current)->target->above_median)
-			(*current)->push_cost += (*current)->target->index;
+			current->push_cost = len_a - current->index;
+		if (current->target->above_median)
+			current->push_cost += current->target->index;
 		else
-			(*current)->push_cost += len_b - (*current)->target->index;
-		*current = (*current)->next;
+			current->push_cost += len_b - current->target->index;
+		current = current->next;
 	}
 }
 
@@ -127,27 +161,6 @@ void	set_cheapest(t_stack_list *stack)
 	cheapest_node->cheapest = true;
 }
 
-void	is_above_median(t_stack_list *stack)
-{
-	int				i;
-	int				median;
-	t_stack_list	*current;
-
-	i = 0;
-	median = mod_lstsize(stack) / 2;
-	current = stack;
-	while (current)
-	{
-		current->index = i;
-		if (i <= median)
-			current->above_median = true;
-		else
-			current->above_median = false;
-		i++;
-		current = current->next;
-	}
-}
-
 t_stack_list	*get_cheapest(t_stack_list *stack)
 {
 	t_stack_list	*current;
@@ -162,13 +175,15 @@ t_stack_list	*get_cheapest(t_stack_list *stack)
 	return (NULL);
 }
 
-void	target_on_top(t_stack_list **a, t_stack_list **b)
+void	target_on_top_a(t_stack_list **a, t_stack_list **b)
 {
 	t_stack_list	*cheapest;
 
 	cheapest = get_cheapest(*a);
-	while (*a != cheapest || *b != cheapest->target)
+	while (*a != cheapest && *b != cheapest->target)
 	{
+		is_above_median(*a);
+		is_above_median(*b);
 		if (cheapest->above_median == true
 			&& cheapest->target->above_median == true)
 			rr(a, b);
@@ -187,14 +202,18 @@ void	target_on_top(t_stack_list **a, t_stack_list **b)
 			else
 			{
 				if (cheapest->target->above_median == true)
+				{
 					rb(b);
+				}
 				else
 					rrb(b);
 			}
 		}
 	}
-	while (*a != cheapest && *b != cheapest->target)
+	while (*a != cheapest || *b != cheapest->target)
 	{
+		is_above_median(*a);
+		is_above_median(*b);
 		if (*a == cheapest && cheapest->target->above_median == true)
 			rb(b);
 		else if (*a == cheapest && cheapest->target->above_median == false)
@@ -206,6 +225,29 @@ void	target_on_top(t_stack_list **a, t_stack_list **b)
 	}
 }
 
+void	target_on_top_b(t_stack_list **a, t_stack_list **b)
+{
+	while (*a != (*b)->target)
+	{
+		is_above_median(*a);
+		if ((*b)->target->above_median == true)
+			ra(a);
+		else if ((*b)->target->above_median == false)
+			rra(a);
+	}
+}
+
+void	min_on_top(t_stack_list **stack)
+{
+	while ((*stack)->content != find_min(*stack)->content)
+	{
+		if (find_min(*stack)->above_median)
+			rra(stack);
+		else
+			ra(stack);
+	}
+}
+
 void	sort_stacks(t_stack_list **a, t_stack_list **b)
 {
 	int				len_a;
@@ -213,20 +255,34 @@ void	sort_stacks(t_stack_list **a, t_stack_list **b)
 
 	len_a = mod_lstsize(*a);
 	biggest_node = find_max(*a);
-	if (len_a-- > 3 && !(is_sorted(a)) && *a != biggest_node)
+	if (len_a-- > 3 && !(is_sorted(a)))
+	{
+		if (*a == biggest_node)
+			ra(a);
 		pb(b, a);
-	if (len_a-- > 3 && !(is_sorted(a)) && *a != biggest_node)
+	}
+	if (len_a-- > 3 && !(is_sorted(a)))
+	{
+		if (*a == biggest_node)
+			ra(a);
 		pb(b, a);
+	}
 	while (len_a-- > 3 && !(is_sorted(a)))
 	{
 		if (*a == biggest_node)
 			ra(a);
 		set_target_a(a, b);
-//		set_cost(a, b);
-		set_cheapest(*a); //good
-//		target_on_top(a, b);
+		set_cost(a, b);
+		set_cheapest(*a);
+		target_on_top_a(a, b);
 		pb(b, a);
 	}
 	sort_three(a);
-//	min_on_top();
+	while (*b)
+	{
+		set_target_b(a, b);
+		target_on_top_b(a, b);
+		pa(a, b);
+	}
+	min_on_top(a);
 }
