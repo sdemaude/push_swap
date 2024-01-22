@@ -6,7 +6,7 @@
 #    By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/10 15:30:49 by sdemaude          #+#    #+#              #
-#    Updated: 2024/01/22 12:09:29 by sdemaude         ###   ########.fr        #
+#    Updated: 2024/01/22 13:13:56 by sdemaude         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,8 @@ SRC = push_swap.c\
 	set_target_utils.c\
 	target_on_top.c
 
+#SRC_BONUS = /checker/checker.c
+
 all : $(NAME)
 
 $(LIB) : $(LIBDIR)
@@ -51,6 +53,8 @@ fclean : clean
 
 re : fclean all
 
+#bonus : 
+
 c: all clean
 
-.PHONY: all clean fclean re c
+.PHONY: all clean fclean re bonus c
