@@ -6,31 +6,11 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 13:40:22 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/21 18:15:10 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:55:49 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-//MUST DELETE !!
-/*void	ft_printstack(t_stack_list **stack)
-{
-	int				i;
-	t_stack_list	*current;
-
-	i = 0;
-	current = *stack;
-	while (current != NULL)
-	{
-		if (current->prev)
-			printf("node prev = %d\n", current->prev->content);
-		printf("node %d = %d\n", i, current->content);
-		if (current->next)
-			printf("node next = %d\n", current->next->content);
-		current = current->next;
-		i++;
-	}
-}*/
 
 int	char_to_int(int size, char **str, int **array)
 {
@@ -96,8 +76,7 @@ int	main(int ac, char **av)
 		return (0);
 	arr_to_stack(&a, array, size);
 	sorting_algo(&a, &b, size);
-	free (a);
-	free (b);
+	mod_lstclear(&a);
 	return (0);
 }
 

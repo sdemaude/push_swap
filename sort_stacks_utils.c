@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:54:38 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/22 11:57:18 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:39:37 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	set_cheapest(t_stack_list *stack)
 			cheapest_value = current->push_cost;
 			cheapest_node = current;
 		}
+		current->cheapest = false;
 		current = current->next;
 	}
 	cheapest_node->cheapest = true;

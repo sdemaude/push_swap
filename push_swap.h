@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 11:48:56 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/22 12:12:03 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:56:02 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int				check_int_maxmin(int **array, char **str, int size);
 int				mod_lstsize(t_stack_list *lst);
 void			mod_lstnew_back(t_stack_list **stack, int content);
 t_stack_list	*mod_lstlast(t_stack_list *lst);
+void			mod_lstclear(t_stack_list **lst);
 
 //Sorting Utils
 bool			is_sorted(t_stack_list **stack);

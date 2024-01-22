@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 12:10:33 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/21 18:14:49 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:49:08 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,18 @@ void	mod_lstnew_back(t_stack_list **stack, int content)
 	prev = mod_lstlast(*stack);
 	prev->next = new_node;
 	new_node->prev = prev;
+}
+
+void	mod_lstclear(t_stack_list **lst)
+{
+	t_stack_list	*new;
+
+	while (*lst != NULL)
+	{
+		new = (*lst)->next;
+		free(*lst);
+		*lst = new;
+	}
+	free(*lst);
+	*lst = NULL;
 }
