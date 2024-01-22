@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:32:28 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/21 18:14:33 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/22 11:00:37 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,27 +67,6 @@ bool	is_sorted(t_stack_list **stack)
 	}
 	return (true);
 }
-/*
-void	sort_three(t_stack_list **stack)
-{
-	if ((*stack)->content < (*stack)->next->content)
-	{
-		rra(stack);
-		if (!is_sorted(stack))
-			sa(stack);
-	}
-	else if (!((*stack)->content > (*stack)->next->content
-			&& ((*stack)->content > (*stack)->next->next->content)
-			&& ((*stack)->next->content < (*stack)->next->next->content)))
-	{
-		sa(stack);
-		if (!is_sorted(stack))
-			rra(stack);
-	}
-	else
-		ra(stack);
-}
-*/
 
 void	sort_three(t_stack_list **stack)
 {
@@ -117,3 +96,24 @@ void	sort_three(t_stack_list **stack)
 	else
 		ra(stack);
 }
+/*
+void	sort_three(t_stack_list **stack)
+{
+	if ((*stack)->content < (*stack)->next->content)
+	{
+		rra(stack);
+		if (!is_sorted(stack))
+			sa(stack);
+	}
+	else if (!((*stack)->content > (*stack)->next->content
+			&& ((*stack)->content > (*stack)->next->next->content)
+			&& ((*stack)->next->content < (*stack)->next->next->content)))
+	{
+		sa(stack);
+		if (!is_sorted(stack))
+			rra(stack);
+	}
+	else
+		ra(stack);
+}
+*/

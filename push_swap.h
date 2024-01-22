@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 11:48:56 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/21 17:53:23 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:12:03 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,19 @@ bool			is_sorted(t_stack_list **stack);
 void			sort_three(t_stack_list **stack);
 void			sort_stacks(t_stack_list **a, t_stack_list **b);
 
+//Set Target Utils
+void			set_target_a(t_stack_list **a, t_stack_list **b);
+void			set_target_b(t_stack_list **a, t_stack_list **b);
+void			set_cost(t_stack_list **src, t_stack_list **dst);
+void			set_cheapest(t_stack_list *stack);
+
 //Stack Utils
+void			is_above_median(t_stack_list *stack);
 t_stack_list	*find_max(t_stack_list *stack);
 t_stack_list	*find_min(t_stack_list *stack);
+t_stack_list	*get_cheapest(t_stack_list *stack);
+void			target_on_top_a(t_stack_list **a, t_stack_list **b);
+void			target_on_top_b(t_stack_list **a, t_stack_list **b);
 
 //Sorting Fonctions
 void			pa(t_stack_list **a, t_stack_list **b);
