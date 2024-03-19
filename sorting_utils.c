@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 19:32:28 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/22 11:00:37 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:19:31 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,22 +79,22 @@ void	sort_three(t_stack_list **stack)
 	max = find_max(*stack)->content;
 	if ((*stack)->content == min)
 	{
-		sa(stack);
-		ra(stack);
+		sa(stack, true);
+		ra(stack, true);
 	}
 	else if ((*stack)->next->content == min
 		&& (*stack)->next->next->content == max)
-		sa(stack);
+		sa(stack, true);
 	else if ((*stack)->next->content == max
 		&& (*stack)->next->next->content == min)
-		rra(stack);
+		rra(stack, true);
 	else if ((*stack)->content == max && (*stack)->next->next->content == min)
 	{
-		sa(stack);
-		rra(stack);
+		sa(stack, true);
+		rra(stack, true);
 	}
 	else
-		ra(stack);
+		ra(stack, true);
 }
 /*
 void	sort_three(t_stack_list **stack)

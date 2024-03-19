@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 14:04:22 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/09 18:12:06 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:16:13 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,24 @@ static void	swap(t_stack_list **head)
 	*head = next;
 }
 
-void	sa(t_stack_list **a)
+void	sa(t_stack_list **a, bool print)
 {
 	swap(a);
-	write(1, "sa\n", 3);
+	if (print)
+		write(1, "sa\n", 3);
 }
 
-void	sb(t_stack_list **b)
+void	sb(t_stack_list **b, bool print)
 {
 	swap(b);
-	write(1, "sb\n", 3);
+	if (print)
+		write(1, "sb\n", 3);
 }
 
-void	ss(t_stack_list **a, t_stack_list **b)
+void	ss(t_stack_list **a, t_stack_list **b, bool print)
 {
 	swap(a);
 	swap(b);
-	write(1, "ss\n", 3);
+	if (print)
+		write(1, "ss\n", 3);
 }

@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:32:16 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/21 13:29:06 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:48:34 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	find_error(int a, char **v)
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	j = 0;
 	while (i < a)
 	{
@@ -92,7 +92,7 @@ int	check_int_maxmin(int **array, char **str, int size)
 	while (i < size)
 	{
 		tmp = ft_itoa((*array)[i]);
-		if (mod_strcmp(str[i + 1], tmp))
+		if (mod_strcmp(str[i], tmp))
 		{
 			free (tmp);
 			return (write(2, "Error\n", 6));

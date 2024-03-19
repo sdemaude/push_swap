@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   checker.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/20 11:48:56 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/22 15:16:16 by sdemaude         ###   ########.fr       */
+/*   Created: 2024/01/22 15:03:06 by sdemaude          #+#    #+#             */
+/*   Updated: 2024/01/22 16:24:25 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef CHECKER_H
+# define CHECKER_H
 
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <stdbool.h>
 # include <limits.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
 
 typedef struct s_stack_list
 {
@@ -42,6 +43,9 @@ int				char_to_int(int size, char **str, int **array);
 void			arr_to_stack(t_stack_list **stack, int *array, int size);
 void			sorting_algo(t_stack_list **a, t_stack_list **b, int size);
 
+int				do_instruction(t_stack_list **a, t_stack_list **b,
+					char	*instruction);
+
 //Mod_LibFt
 int				mod_lstsize(t_stack_list *lst);
 void			mod_lstnew_back(t_stack_list **stack, int content);
@@ -50,22 +54,6 @@ void			mod_lstclear(t_stack_list **lst);
 
 //Sorting Utils
 bool			is_sorted(t_stack_list **stack);
-void			sort_three(t_stack_list **stack);
-void			sort_stacks(t_stack_list **a, t_stack_list **b);
-
-//Set Target Utils
-void			set_target_a(t_stack_list **a, t_stack_list **b);
-void			set_target_b(t_stack_list **a, t_stack_list **b);
-void			set_cost(t_stack_list **src, t_stack_list **dst);
-void			set_cheapest(t_stack_list *stack);
-
-//Stack Utils
-void			is_above_median(t_stack_list *stack);
-t_stack_list	*find_max(t_stack_list *stack);
-t_stack_list	*find_min(t_stack_list *stack);
-t_stack_list	*get_cheapest(t_stack_list *stack);
-void			target_on_top_a(t_stack_list **a, t_stack_list **b);
-void			target_on_top_b(t_stack_list **a, t_stack_list **b);
 
 //Sorting Fonctions
 void			pa(t_stack_list **a, t_stack_list **b, bool print);

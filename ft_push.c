@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 14:04:09 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/09 18:11:55 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:20:10 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,16 @@ static void	push(t_stack_list **dst, t_stack_list **src)
 	}
 }
 
-void	pa(t_stack_list **a, t_stack_list **b)
+void	pa(t_stack_list **a, t_stack_list **b, bool print)
 {
 	push(a, b);
-	write(1, "pa\n", 3);
+	if (print)
+		write(1, "pa\n", 3);
 }
 
-void	pb(t_stack_list **b, t_stack_list **a)
+void	pb(t_stack_list **b, t_stack_list **a, bool print)
 {
 	push(b, a);
-	write(1, "pb\n", 3);
+	if (print)
+		write(1, "pb\n", 3);
 }

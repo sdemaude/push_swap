@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 12:14:29 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/22 12:39:43 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/02/19 10:02:40 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void	min_on_top(t_stack_list **stack)
 	while ((*stack)->content != find_min(*stack)->content)
 	{
 		if (find_min(*stack)->above_median)
-			ra(stack);
+			ra(stack, true);
 		else
-			rra(stack);
+			rra(stack, true);
 	}
 }
 
@@ -33,7 +33,7 @@ static void	sort_stacks_return(t_stack_list **a, t_stack_list **b)
 		set_cost(b, a);
 		set_cheapest(*b);
 		target_on_top_b(a, b);
-		pa(a, b);
+		pa(a, b, true);
 	}
 	min_on_top(a);
 }
@@ -52,8 +52,8 @@ void	sort_stacks(t_stack_list **a, t_stack_list **b)
 		if (len_a-- > 3 && !(is_sorted(a)))
 		{
 			if (*a == biggest_node)
-				ra(a);
-			pb(b, a);
+				ra(a, true);
+			pb(b, a, true);
 		}
 	}
 	while (len_a-- > 3 && !is_sorted(a))
@@ -62,7 +62,7 @@ void	sort_stacks(t_stack_list **a, t_stack_list **b)
 		set_cost(a, b);
 		set_cheapest(*a);
 		target_on_top_a(a, b);
-		pb(b, a);
+		pb(b, a, true);
 	}
 	sort_stacks_return(a, b);
 }

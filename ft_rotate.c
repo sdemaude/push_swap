@@ -6,7 +6,7 @@
 /*   By: sdemaude <sdemaude@student.42lehavre.fr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 14:03:57 by sdemaude          #+#    #+#             */
-/*   Updated: 2024/01/09 18:12:00 by sdemaude         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:16:11 by sdemaude         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,24 @@ static void	rotate(t_stack_list **stack)
 	last->next->next = NULL;
 }
 
-void	ra(t_stack_list **a)
+void	ra(t_stack_list **a, bool print)
 {
 	rotate(a);
-	write(1, "ra\n", 3);
+	if (print)
+		write(1, "ra\n", 3);
 }
 
-void	rb(t_stack_list **b)
+void	rb(t_stack_list **b, bool print)
 {
 	rotate(b);
-	write(1, "rb\n", 3);
+	if (print)
+		write(1, "rb\n", 3);
 }
 
-void	rr(t_stack_list **a, t_stack_list **b)
+void	rr(t_stack_list **a, t_stack_list **b, bool print)
 {
 	rotate(a);
 	rotate(b);
-	write(1, "rr\n", 3);
+	if (print)
+		write(1, "rr\n", 3);
 }
